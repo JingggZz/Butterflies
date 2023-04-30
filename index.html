@@ -40,6 +40,8 @@
 			import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 			import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 
+			import { VRButton } from 'three/addons/webxr/VRButton.js';
+
 			let mixer;
 
 			const clock = new THREE.Clock();
@@ -102,6 +104,9 @@
 			};
 
 
+			document.body.appendChild( VRButton.createButton( renderer ) );
+			renderer.xr.enabled = true;
+			
 			function animate() {
 
 				requestAnimationFrame( animate );
