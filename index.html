@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>three.js</title>
+		<title>three.js webgl - animation - keyframes</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<link type="text/css" rel="stylesheet" href="main.css">
+		<style>
+			body {
+				background-color: #c0e2de;
+				color: #cabebe;
+			}
+
+			a {
+				color: #d2e1f7;
+			}
+		</style>
 	</head>
 
-<body>
+	<body>
 
-		<div id="info">
-			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> ar - cones<br/>
-		</div>
-
+		<div id="container"></div>
 
 		<!-- Import maps polyfill -->
 		<!-- Remove this when import maps will be widely supported -->
@@ -39,8 +46,6 @@
 			import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 			import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 
-
-
 			let mixer;
 
 			const clock = new THREE.Clock();
@@ -57,11 +62,11 @@
 			const pmremGenerator = new THREE.PMREMGenerator( renderer );
 
 			const scene = new THREE.Scene();
-			scene.background = new THREE.Color( 0xbfe3dd );
+			scene.background = new THREE.Color( 0xbfe4dd );
 			scene.environment = pmremGenerator.fromScene( new RoomEnvironment(), 0.04 ).texture;
 
-			const camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 100 );
-			camera.position.set( 5, 2, 8 );
+			const camera = new THREE.PerspectiveCamera( 10, window.innerWidth / window.innerHeight, 1, 100 );
+			camera.position.set(5, 3, 0 );
 
 			const controls = new OrbitControls( camera, renderer.domElement );
 			controls.target.set( 0, 0.5, 0 );
@@ -74,11 +79,11 @@
 
 			const loader = new GLTFLoader();
 			loader.setDRACOLoader( dracoLoader );
-			loader.load( '/butterflies.glb', function ( gltf ) {
+			loader.load( 'model/butterflies.glb', function ( gltf ) {
 
 				const model = gltf.scene;
 				model.position.set( 1, 1, 0 );
-				model.scale.set( 1, 1, 1 );
+				model.scale.set( 0.01, 0.01, 0.01 );
 				scene.add( model );
 
 				mixer = new THREE.AnimationMixer( model );
@@ -101,6 +106,7 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 
 			};
+
 
 			function animate() {
 
